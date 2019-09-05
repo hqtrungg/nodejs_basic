@@ -1,0 +1,14 @@
+extends ../layouts/common.pug
+
+block content
+  h1 Users
+  a(href="/users/create") Create New User
+  form(action="/users/search", method="GET", class="d-flex md-6")
+      input(type="text", name="q", class="form-control")
+      button(class="btn btn-success") Search
+  ul
+    each val in users
+      li
+        span= val.name
+        span &nbsp
+        a(href="/users/" + val.id) View
