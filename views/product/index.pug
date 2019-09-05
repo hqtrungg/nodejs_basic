@@ -1,0 +1,72 @@
+extends ../layouts/common.pug
+
+block content
+    h1 Product
+    .d-flex.align-items-center
+        form.ml-auto(action="/products/search", method="GET", class="d-flex md-6")
+            input.mr-2(type="text", name="q", class="form-control")
+            button(class="btn btn-success") Search
+    .row
+        each product in products
+            .col-sm-6.col-md-4.col-lg-3   
+                .card.mb-3(style="height: 450px")
+                    img.card-img-top(src=product.image)
+                    .card-body
+                        h5.card-title(style="height: 50px")= product.name
+                        p.card-text(style="height: 110px")= product.description
+                        a.btn.btn-primary(href='#') Add to cart
+    .row
+        nav.ml-auto.mt-5(aria-label='Page navigation example')
+            ul.pagination
+                if page === 1
+                    li.page-item
+                        a.page-link(href=`/product/${page}`, aria-label='Previous')
+                            span(aria-hidden='false') &laquo;
+                    li.page-item
+                        a.page-link(href=`/product/${page}`) #{page}
+                    li.page-item
+                        a.page-link(href=`/product/${page + 1}`) #{page + 1}
+                    li.page-item
+                        a.page-link(href=`/product/${page + 2}`) #{page + 2}
+                    li.page-item
+                        a.page-link(href=`/product/${page + 1}`, aria-label='Next')
+                            span(aria-hidden="true") &raquo;
+                else if page === total
+                    li.page-item
+                        a.page-link(href=`/product/${page - 1}`, aria-label='Previous')
+                            span(aria-hidden='true') &laquo;
+                    li.page-item
+                        a.page-link(href=`/product/${page - 2}`) #{page - 2}
+                    li.page-item
+                        a.page-link(href=`/product/${page - 1}`) #{page - 1}
+                    li.page-item
+                        a.page-link(href=`/product/${page}`) #{page}
+                    li.page-item
+                        a.page-link(href=`/product/${page}`, aria-label='Next')
+                            span(aria-hidden="false") &raquo;
+                else if page > total
+                    li.page-item
+                        a.page-link(href=`/product/${total - 1}`, aria-label='Previous')
+                            span(aria-hidden='true') &laquo;
+                    li.page-item
+                        a.page-link(href=`/product/${total - 2}`) #{total - 2}
+                    li.page-item
+                        a.page-link(href=`/product/${total - 1}`) #{total - 1}
+                    li.page-item
+                        a.page-link(href=`/product/${total}`) #{total}
+                    li.page-item
+                        a.page-link(href=`/product/${total}`, aria-label='Next')
+                            span(aria-hidden="true") &raquo;
+                else 
+                    li.page-item
+                        a.page-link(href=`/product/${page - 1}`, aria-label='Previous')
+                            span(aria-hidden='true') &laquo;
+                    li.page-item
+                        a.page-link(href=`/product/${page}`) #{page}
+                    li.page-item
+                        a.page-link(href=`/product/${page + 1}`) #{page + 1}
+                    li.page-item
+                        a.page-link(href=`/product/${page + 2}`) #{page + 2}
+                    li.page-item
+                        a.page-link(href=`/product/${page + 1}`, aria-label='Next')
+                            span(aria-hidden="true") &raquo;
